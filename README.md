@@ -33,13 +33,8 @@ Train on a vanilla LIBERO suite:
 ```bash
 python run.py --train_suite libero_spatial
 ```
-Supported `--train_suite` values:
-- `libero_object`
-- `libero_spatial`
-- `libero_goal`
-- `libero_90`
-- `libero_10`
-- 
+Supported `--train_suite` values: `libero_object`, `libero_spatial`, `libero_goal`, `libero_90`, `libero_10`
+  
 ## Evaluation with a checkpoint
 ### 1) Vanilla LIBERO evaluation
 Evaluate a checkpoint on the same vanilla suite:
