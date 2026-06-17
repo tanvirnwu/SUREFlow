@@ -1,0 +1,24 @@
+import os
+
+FRAMEWORK_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.path.pardir)
+)
+
+
+def sim_framework_path(*args) -> str:
+    """
+    Abstraction from os.path.join()
+    Builds absolute paths from relative path strings with MambaVLA/ as root.
+    If args already contains an absolute path, it is used as root for the subsequent joins
+    Args:
+        *args:
+
+    Returns:
+        absolute path
+
+    """
+    abs_path = os.path.abspath(os.path.join(FRAMEWORK_DIR, *args))
+    return abs_path
+
+
+
