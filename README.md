@@ -47,6 +47,14 @@ Evaluate a checkpoint on the same vanilla suite:
 ```bash
 python run.py --train_suite libero_goal --checkpoint_path /path/to/ckpt.pth
 ```
+
+### 2) LIBERO-PRO evaluation on the same checkpoint
+Evaluate the same checkpoint on a LIBERO-PRO suite:
+
+```bash
+python run.py --train_suite libero_goal --eval_suite object --checkpoint_path /path/to/ckpt.pth
+```
+
 #### Eval suites (LIBERO-PRO suffixes)
 Optional `--eval_suite` values:
 - `swap`
@@ -55,28 +63,13 @@ Optional `--eval_suite` values:
 - `task`
 - `temp`
 - 
-### 2) LIBERO-PRO evaluation on the same checkpoint
-Evaluate the same checkpoint on a LIBERO-PRO suite:
-
-```bash
-python run.py --train_suite libero_goal --eval_suite object --checkpoint_path /path/to/ckpt.pth
-```
 
 In this mode:
 - dataset benchmark remains `libero_goal`
 - simulator benchmark is `libero_goal_object`
 - evaluation embeddings are loaded from `language_embeddings/libero_goal_object.pkl`
 
-## Embedding loading behavior
-During evaluation, simulation loads embeddings from:
 
-```text
-language_embeddings/{sim_benchmark_type}.pkl
-```
-
-Error behavior:
-- Missing embedding file -> `FileNotFoundError`
-- Missing task key in loaded embedding dict -> `KeyError` with example keys
 
 ## Repository notes
 The public package is `SUREFlow`. The original Mamba implementation is kept under `SUREFlow/mamba/` so the backbone code remains easy to compare with the upstream block implementation.
