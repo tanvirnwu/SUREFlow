@@ -57,12 +57,7 @@ python run.py --train_suite libero_goal --eval_suite object --checkpoint_path /p
 
 #### Eval suites (LIBERO-PRO suffixes)
 Optional `--eval_suite` values:
-- `swap`
-- `object`
-- `lan`
-- `task`
-- `temp`
-- 
+- `swap` - `object` - `lan` - `task` - `temp`
 
 In this mode:
 - dataset benchmark remains `libero_goal`
