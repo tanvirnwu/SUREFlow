@@ -279,7 +279,7 @@ class TrainerConfig:
 @dataclass
 class DatasetConfig:
     """Dataset configuration."""
-    _target_: str = "SUREFlow.benchmark.libero.libero_dataset.LiberoDataset"
+    _target_: str = "dataloader.libero_dataset.LiberoDataset"
     # Note: benchmark_type is not passed to LiberoDataset, it's extracted from data_directory
     benchmark_type: str = "libero_object"  # Used for path construction
     demos_per_task: int = 70
@@ -311,7 +311,7 @@ class DatasetConfig:
 @dataclass
 class SimulationConfig:
     """Simulation configuration."""
-    _target_: str = "SUREFlow.benchmark.libero.libero_sim.LiberoSim"
+    _target_: str = "dataloader.libero_sim.LiberoSim"
     rollouts: int = 1
     max_step_per_episode: int = 600
     benchmark_type: str = DatasetConfig.benchmark_type

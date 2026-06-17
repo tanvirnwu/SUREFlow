@@ -28,7 +28,7 @@ def _resolve_libero_modules():
     - bundled LIBERO-PRO layout: `libero.libero...`
     - pip layout: `libero...`
     """
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     bundled_libero_root = os.path.join(repo_root, "LIBERO-PRO")
     if os.path.isdir(bundled_libero_root) and bundled_libero_root not in sys.path:
         # Ensure bundled LIBERO-PRO benchmarks (e.g., libero_10_object) are discoverable

@@ -54,8 +54,8 @@ def _get_class_from_target(target: str) -> Type:
     elif target == "SUREFlow.Trainer":
         from SUREFlow.main import Trainer
         return Trainer
-    elif target == "SUREFlow.benchmark.libero.libero_sim.LiberoSim":
-        from SUREFlow.benchmark.libero.libero_sim import MultiTaskSim
+    elif target == "dataloader.libero_sim.LiberoSim":
+        from dataloader.libero_sim import MultiTaskSim
         return MultiTaskSim
     elif target == "SUREFlow.ActionFLowMatching":
         from SUREFlow import ActionFLowMatching
@@ -78,8 +78,8 @@ def _get_class_from_target(target: str) -> Type:
     elif target == "SUREFlow.ResNetEncoder":
         from SUREFlow import ResNetEncoder
         return ResNetEncoder
-    elif target == "SUREFlow.benchmark.libero.libero_dataset.LiberoDataset":
-        from SUREFlow.benchmark.libero.libero_dataset import LiberoDataset
+    elif target == "dataloader.libero_dataset.LiberoDataset":
+        from dataloader.libero_dataset import LiberoDataset
         return LiberoDataset
     else:
         raise ValueError(f"Unknown target class: {target}")
@@ -132,7 +132,7 @@ def create_trainer(config: MainConfig) -> Any:
     trainer_config = config.trainer
     
     # Create dataset directly with only the required parameters
-    from SUREFlow.benchmark.libero.libero_dataset import LiberoDataset
+    from dataloader.libero_dataset import LiberoDataset
     from pathlib import Path
     dataset = LiberoDataset(
         data_directory=Path(config.dataset.dataset_path),
