@@ -31,10 +31,10 @@ CAMERA_NAMES = ["agentview", "eye_in_hand"]
 EPOCHS = 300
 TRAIN_BATCH_SIZE = 256
 VAL_BATCH_SIZE = 256
-NUM_WORKERS = 8
+NUM_WORKERS = 0
 
 # Sampling
-NUM_SAMPLING_STEPS = 70
+NUM_SAMPLING_STEPS = 50
 
 # Dataset paths
 DATA_ROOT = "/home/HDD/tanvir_HDD/datasets/robot/"
@@ -55,8 +55,8 @@ class WandbConfig:
     """Wandb configuration."""
     enabled: bool = True
     entity: Optional[str] = "tanvirnwu"
-    project: Optional[str] = "SUREFlow"
-    mode: Optional[str] = ""
+    project: Optional[str] = "SUREFlow_demo50_FiLM"
+    mode: Optional[str] = "LS_E300_B256"
     tags: List[str] = field(default_factory=list)
 
 
@@ -187,11 +187,11 @@ class LanguageEncoderConfig:
 class ModelConfig:
     """Model configuration."""
     _target_: str = "SUREFlow.SUREFlow"
-    if_film_condition: bool = False
+    if_film_condition: bool = True
     consider_robot_states: bool = CONSIDER_ROBOT_STATES
     optimizer: OptimizerConfig = field(default_factory=OptimizerConfig)
     lr_scheduler: LRSchedulerConfig = field(default_factory=LRSchedulerConfig)
-    use_lr_scheduler: bool = False
+    use_lr_scheduler: bool = True
     perception_seq_len: int = PERCEPTION_SEQ_LEN
     action_seq_len: int = ACTION_SEQ_LEN
     cam_names: List[str] = field(default_factory=lambda: CAMERA_NAMES)
@@ -330,7 +330,7 @@ class DatasetConfig:
     _target_: str = "dataloader.libero_dataset.LiberoDataset"
     # Note: benchmark_type is not passed to LiberoDataset, it's extracted from data_directory
     benchmark_type: str = "libero_object"  # Used for path construction
-    demos_per_task: int = 70
+    demos_per_task: int = 50
     dataset_path: str = DATA_ROOT
     max_len_data: int = 347
 
@@ -343,7 +343,7 @@ class DatasetConfig:
 class SimulationConfig:
     """Simulation configuration."""
     _target_: str = "dataloader.libero_sim.LiberoSim"
-    rollouts: int = 1
+    rollouts: int = 50
     max_step_per_episode: int = 600
     benchmark_type: str = DatasetConfig.benchmark_type
     use_eye_in_hand: bool = False
