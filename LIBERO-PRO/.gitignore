@@ -2,6 +2,9 @@
 .hydra
 *pyc
 datasets
+!libero/datasets/
+libero/datasets/*
+!libero/datasets/README.md
 results
 outputs/*
 /MUJOCO_LOG.TXT
