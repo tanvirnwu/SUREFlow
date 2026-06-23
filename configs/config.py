@@ -28,7 +28,7 @@ CONSIDER_ROBOT_STATES = False
 CAMERA_NAMES = ["agentview", "eye_in_hand"]
 
 # Training defaults (shared between MainConfig and TrainerConfig sub-configs)
-EPOCHS = 300
+EPOCHS = 400
 TRAIN_BATCH_SIZE = 256
 VAL_BATCH_SIZE = 256
 NUM_WORKERS = 0
@@ -55,8 +55,8 @@ class WandbConfig:
     """Wandb configuration."""
     enabled: bool = True
     entity: Optional[str] = "tanvirnwu"
-    project: Optional[str] = "SUREFlow_demo50_FiLM"
-    mode: Optional[str] = "LS_E300_B256"
+    project: Optional[str] = "SUREFlow_demo70_FiLM"
+    mode: Optional[str] = "LO_E400_B256_TS100k"
     tags: List[str] = field(default_factory=list)
 
 
@@ -80,7 +80,7 @@ class LRSchedulerConfig:
     init_lr: float = 1e-4
     init_lr_scale: float = 0.1
     final_lr_scale: float = 1e-6
-    total_steps: int = 50000
+    total_steps: int = 100000
     phase_ratio: str = "(0.02, 0.08, 0.9)"
     lr: float = 1e-4
 
@@ -135,7 +135,7 @@ class BackboneConfig:
     device: str = DEVICE
     linear_output: bool = True
     use_ada_conditioning: bool = False
-    use_sigma_film: bool = False
+    use_sigma_film: bool = True
     use_action_decoder: bool = True
     action_decoder_heads: int = 4
     action_decoder_mlp_ratio: float = 2.0
@@ -187,7 +187,7 @@ class LanguageEncoderConfig:
 class ModelConfig:
     """Model configuration."""
     _target_: str = "SUREFlow.SUREFlow"
-    if_film_condition: bool = True
+    if_film_condition: bool = False # not used in the code
     consider_robot_states: bool = CONSIDER_ROBOT_STATES
     optimizer: OptimizerConfig = field(default_factory=OptimizerConfig)
     lr_scheduler: LRSchedulerConfig = field(default_factory=LRSchedulerConfig)
@@ -229,7 +229,7 @@ class TrainingConfig:
     epoch: int = EPOCHS
     perception_seq_len: int = PERCEPTION_SEQ_LEN
     eval_every_n_epochs: int = 5
-    save_every_n_epochs: int = 50
+    save_every_n_epochs: int = 100
 
 
 @dataclass
@@ -330,7 +330,7 @@ class DatasetConfig:
     _target_: str = "dataloader.libero_dataset.LiberoDataset"
     # Note: benchmark_type is not passed to LiberoDataset, it's extracted from data_directory
     benchmark_type: str = "libero_object"  # Used for path construction
-    demos_per_task: int = 50
+    demos_per_task: int = 70
     dataset_path: str = DATA_ROOT
     max_len_data: int = 347
 
@@ -344,15 +344,15 @@ class SimulationConfig:
     """Simulation configuration."""
     _target_: str = "dataloader.libero_sim.LiberoSim"
     rollouts: int = 50
-    max_step_per_episode: int = 600
+    max_step_per_episode: int = 350
     benchmark_type: str = DatasetConfig.benchmark_type
-    use_eye_in_hand: bool = False
+    use_eye_in_hand: bool = True
     seed: int = 11
     device: str = DEVICE
     render_image: bool = False
     n_cores: int = 2
     use_multiprocessing: bool = False
-    save_video: bool = True
+    save_video: bool = False
     save_video_dir: str = "/home/HDD/tanvir_HDD/robot/SUREFlow/Evl_Video"
 
 
