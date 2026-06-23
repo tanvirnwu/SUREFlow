@@ -344,7 +344,7 @@ class SimulationConfig:
     """Simulation configuration."""
     _target_: str = "dataloader.libero_sim.LiberoSim"
     rollouts: int = 50
-    max_step_per_episode: int = 350
+    max_step_per_episode: int = 300
     benchmark_type: str = DatasetConfig.benchmark_type
     use_eye_in_hand: bool = True
     seed: int = 11
